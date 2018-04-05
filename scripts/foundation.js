@@ -30,6 +30,8 @@ if (args[1] === 'init') {
     console.log('Creating project', projectName);
     console.log('Target Path', path.resolve(args[3] || projectName));
     createProject(projectName, args[3]);
+    console.log('New project created. Just move into the new folder and run');
+    console.log('   foundation start');
   }
 } else {
   // Proxy to react-native cli, passing `FOUNDATION_PROJECT` through environment
