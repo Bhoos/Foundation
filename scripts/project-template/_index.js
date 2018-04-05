@@ -9,7 +9,8 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  AppRegistry,
 } from 'react-native';
 
 const instructions = Platform.select({
