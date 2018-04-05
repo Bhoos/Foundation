@@ -1,0 +1,21 @@
+{
+  "name": "{{name}}",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "foundation start"
+  },
+  "peerDependencies": {
+    "react": "{{reactVersion}}",
+    "react-native": "{{reactNativeVersion}}"
+  },
+  "devDependencies": {
+    "babel-jest": "22.4.3",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "22.4.3",
+    "react-test-renderer": "{{reactVersion}}"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
