@@ -19,7 +19,8 @@ or
 
 # Why create Foundation
 1. react-native is great, but used a lot of space, when working with
-   multiple project. And its freaking upgrading to newer versions.
+   multiple project. And it freaked me out every time a new upgrade
+   was released.
 2. Expo is great, but is not as flexible as bare bone react-native.
    (And felt quite slow during development).
 
