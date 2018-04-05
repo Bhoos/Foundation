@@ -5,6 +5,9 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
+  "bin": {
+    "foundation": "scripts/foundation.js"
+  },
   "dependencies": {
     "react": "^16.3.0-alpha.1",
     "react-native": "0.54.4"
