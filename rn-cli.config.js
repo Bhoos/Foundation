@@ -8,50 +8,57 @@
 const fs = require('fs');
 const path = require('path');
 
-// eslint-disable-next-line import/no-dynamic-require
-const pkg = require(path.resolve(process.env.FOUNDATION_PROJECT, 'package.json'));
+const config = {};
 
-const hoistedLibs = ['react', 'react-native'];
+// Check if the bundler was invoked via foundation or not
+// Only add additional details, if run via foundation
+if (process.env.FOUNDATION_PROJECT) {
+  // eslint-disable-next-line import/no-dynamic-require
+  const pkg = require(path.resolve(process.env.FOUNDATION_PROJECT, 'package.json'));
 
-function getLinkedLibs() {
-  // Search for symbolic links and add them into project roots
-  // So we can debug the linked libraries without restarting the
-  // bundler
-  if (!pkg.dependencies) {
-    return [];
-  }
+  const hoistedLibs = ['react', 'react-native'];
 
-  return Object.keys(pkg.dependencies).reduce((res, lib) => {
-    const p = path.resolve(process.env.FOUNDATION_PROJECT, 'node_modules', lib);
-    if (fs.lstatSync(p).isSymbolicLink()) {
-      res.push(fs.realpathSync(p));
+  function getLinkedLibs() {
+    // Search for symbolic links and add them into project roots
+    // So we can debug the linked libraries without restarting the
+    // bundler
+    if (!pkg.dependencies) {
+      return [];
     }
 
-    return res;
-  }, []);
-}
+    return Object.keys(pkg.dependencies).reduce((res, lib) => {
+      const p = path.resolve(process.env.FOUNDATION_PROJECT, 'node_modules', lib);
+      if (fs.lstatSync(p).isSymbolicLink()) {
+        res.push(fs.realpathSync(p));
+      }
 
-const linkedLibs = getLinkedLibs();
-// Display a warning message in case there are linked libraries
-if (linkedLibs.length > 0) {
-  console.warn('WARNING: The following libraries are being linked from the source');
-  linkedLibs.forEach(lib => console.log('  >', lib));
-  console.log('It is ok to link libraries for testing that particular library.');
-  console.log('However for production make sure you have proper versions of the');
-  console.log('libraries installed.');
-}
+      return res;
+    }, []);
+  }
 
-module.exports = {
-  extraNodeModules: hoistedLibs.reduce((res, lib) => ({
+  const linkedLibs = getLinkedLibs();
+  // Display a warning message in case there are linked libraries
+  if (linkedLibs.length > 0) {
+    console.warn('WARNING: The following libraries are being linked from the source');
+    linkedLibs.forEach(lib => console.log('  >', lib));
+    console.log('It is ok to link libraries for testing that particular library.');
+    console.log('However for production make sure you have proper versions of the');
+    console.log('libraries installed.');
+  }
+
+  // Add the hoisted libraries (react, react-native)
+  config.extraNodeModules = hoistedLibs.reduce((res, lib) => ({
     ...res,
     [lib]: path.resolve(__dirname, 'node_modules', lib),
-  }), {}),
-  getProjectRoots() {
-    return [
-      process.env.FOUNDATION_PROJECT,
-      // path.resolve(__dirname, '..', 'demo'),
-      path.resolve(__dirname),
-      ...linkedLibs,
-    ];
-  },
-};
+  }), {});
+
+  // Provde the project roots
+  config.getProjectRoots = () => [
+    process.env.FOUNDATION_PROJECT,
+    path.resolve(__dirname),
+    ...linkedLibs,
+  ];
+}
+
+
+module.exports = config;
