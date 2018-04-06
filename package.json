@@ -1,6 +1,6 @@
 {
   "name": "react-native-foundation",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "An improved react-native cli",
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
