@@ -1,5 +1,5 @@
 {
-  "name": "@bhoos/foundation",
+  "name": "react-native-foundation",
   "version": "0.1.0",
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
