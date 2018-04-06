@@ -1,6 +1,7 @@
 {
   "name": "react-native-foundation",
   "version": "0.1.0",
+  "description": "An improved react-native cli",
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
@@ -20,5 +21,12 @@
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bhoos/foundation.git"
+  },
+  "author": "Ranjan Shrestha <ranjan.newa@gmail.com>",
+  "homepage": "https://github.com/bhoos/foundation",
+  "license": "MIT"
 }
