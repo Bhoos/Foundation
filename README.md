@@ -2,10 +2,10 @@
 A react-native app runner without extra bloat
 
 ## Installation
-> `$ yarn global add @bhoos/foundation`
+> `$ yarn global add react-native-founddation`
 
 or  
-> `$ npm install -g @bhoos/foundation`
+> `$ npm install -g react-native-foundation`
 
 ## Creating new project
 > `$ foundation init ProjectName`
