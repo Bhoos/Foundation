@@ -72,10 +72,8 @@ if (pkg.dependencies) {
 console.log('Hoisting Libraries');
 config.extraNodeModules = Object.keys(hoistedLibs).reduce((res, key) => {
   console.log(`  :: ${key} > ${hoistedLibs[key]}`);
-  return {
-    ...res,
-    [key]: path.resolve(hoistedLibs[key], 'node_modules', key),
-  };
+  res[key] = path.resolve(hoistedLibs[key], 'node_modules', key);
+  return res;
 }, {});
 
 console.log('Live Libraries');
