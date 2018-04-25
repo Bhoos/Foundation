@@ -30,7 +30,6 @@ const liveFolders = {};
 
 if (pkg.dependencies) {
   Object.keys(pkg.dependencies).forEach((lib) => {
-    console.log('Searching for library', lib);
     const libVersion = pkg.dependencies[lib];
 
     // Search iteratively for library within node_modules
@@ -114,5 +113,4 @@ if (cwd !== __dirname) {
 // Provde the project roots
 config.getProjectRoots = () => projectRoots;
 
-console.log('Config is', config);
 module.exports = config;
